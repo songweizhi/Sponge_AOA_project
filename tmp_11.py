@@ -1,51 +1,40 @@
-
-meta_data_txt       = '/Users/songweizhi/Desktop/Sponge_r220/0_metadata/metadata_614.txt'
-gnm_id_txt          = '/Users/songweizhi/Desktop/3_combined_genomes_50_5_dRep97_284_id.txt'
-gnm_id_txt          = '/Users/songweizhi/Desktop/dRep95_214.txt'
-dbscc_gnm_id_txt    = '/Users/songweizhi/Desktop/Sponge_r220/0_metadata/gnm_id_291_DBSCCs.txt'
-completeness_cutoff = 80
-
-op_txt_symbiont     = '/Users/songweizhi/Desktop/214_grouping_symbiont_vs_freeliving.txt'
-op_txt_dbscc        = '/Users/songweizhi/Desktop/214_grouping_DBSCC_vs_nonDBSCC_and_freeliving.txt'
+from Bio import SeqIO
 
 
-gnm_id_set = set()
-for each in open(gnm_id_txt):
-    gnm_id_set.add(each.strip())
+leaf_taxonomy_txt                   = '/Users/songweizhi/Desktop/Sponge_r226/07_Sponge_tree/tax_to_tax_lineage.txt'
 
-dbscc_gnm_id_set = set()
-for each in open(dbscc_gnm_id_txt):
-    dbscc_gnm_id_set.add(each.strip().split()[0])
 
-op_txt_symbiont_handle = open(op_txt_symbiont, 'w')
-op_txt_dbscc_handle = open(op_txt_dbscc, 'w')
-col_index = dict()
-for each_gnm in open(meta_data_txt):
-    each_gnm_split = each_gnm.strip().split('\t')
-    if each_gnm.startswith('Genome\t'):
-        col_index = {key: i for i, key in enumerate(each_gnm_split)}
-    else:
-        gnm_id = each_gnm_split[col_index['Genome']]
-        if gnm_id in gnm_id_set:
-            gnm_cpl      = float(each_gnm_split[col_index['Completeness']])
-            host_species = each_gnm_split[col_index['Host']]
+genus_set_18s_tree = set()
+for each in open('/Users/songweizhi/Desktop/rename_leaf.txt'):
+    genus_set_18s_tree.add(each.split('\t')[0])
 
-            if gnm_cpl >= completeness_cutoff:
-                if not 'coral' in host_species:
-                    if host_species != 'na':
+tax_lineage_dict = dict()
+for each_line in open(leaf_taxonomy_txt):
+    each_line_split = each_line.strip().split('\t')
+    tax_lineage_dict[each_line_split[0]] = each_line_split[1]
 
-                        # write out symbiont_vs_freeliving
-                        if host_species == 'nonsponge':
-                            op_txt_symbiont_handle.write('%s\tFreeliving\n' % gnm_id)
-                        else:
-                            op_txt_symbiont_handle.write('%s\tSymbiont\n' % gnm_id)
+o_to_g_dict = dict()
+for each in SeqIO.parse('/Users/songweizhi/Desktop/Sponge_r226/07_Sponge_tree/RefSeqs_with_AOA_COI_iden95_g_representatives_JL.ffn', 'fasta'):
+    seq_id = each.id
+    #if seq_id not in genus_set_18s_tree:
+    # print(seq_id, tax_lineage_dict[seq_id])
+    lineage_str = tax_lineage_dict[seq_id]
+    lineage_str_split = lineage_str.split(';')
+    current_o = 'o__'
+    for each in lineage_str_split:
+        if each.startswith('o__'):
+            current_o = each
+    if current_o != 'o__':
+        if current_o not in o_to_g_dict:
+            o_to_g_dict[current_o] = set()
+        o_to_g_dict[current_o].add(seq_id)
 
-                        # write out DBSCC_vs_nonDBSCC_and_freeliving
-                        if gnm_id in dbscc_gnm_id_set:
-                            op_txt_dbscc_handle.write('%s\tDBSCC\n' % gnm_id)
-                        else:
-                            op_txt_dbscc_handle.write('%s\tnonDBSCC\n' % gnm_id)
+# for each_o in o_to_g_dict:
+#     #if len(o_to_g_dict[each_o]) >= 3:
+#     print(each_o, ','.join(o_to_g_dict[each_o]), sep='\t')
 
-op_txt_symbiont_handle.close()
-op_txt_dbscc_handle.close()
-
+for each in tax_lineage_dict:
+    if each.startswith('g__'):
+        str_to_write = '%s\t%s' % (each, tax_lineage_dict[each])
+        str_to_write = str_to_write.replace(';s__', '')
+        print(str_to_write)
