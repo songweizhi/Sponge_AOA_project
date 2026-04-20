@@ -2,14 +2,14 @@
 ########################################################################################################################
 
 # file in
-gnm_size_txt                = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/5_combined_genomes_407_size.txt'
-gnm_quality_txt             = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/5_combined_genomes_407_quality.txt'
-gnm_taxon_txt               = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/5_combined_genomes_407.ar53.summary.tsv'
-meta_table_old              = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/2_metadata/0_metadata_final.txt'
-drep97_representatives_txt  = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/5_combined_genomes_dRep97_wd/dereplicated_genomes.txt'
+gnm_size_txt                = '/Users/songweizhi/Documents/Research/Sponge/5_combined_genomes_407_size.txt'
+gnm_quality_txt             = '/Users/songweizhi/Documents/Research/Sponge/5_combined_genomes_407_quality.txt'
+gnm_taxon_txt               = '/Users/songweizhi/Documents/Research/Sponge/5_combined_genomes_407.ar53.summary.tsv'
+meta_table_old              = '/Users/songweizhi/Documents/Research/Sponge/2_metadata/0_metadata_final.txt'
+drep97_representatives_txt  = '/Users/songweizhi/Documents/Research/Sponge/5_combined_genomes_dRep97_wd/dereplicated_genomes.txt'
 
 # file out
-meta_table_new              = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/5_combined_genomes_407_metadata.txt'
+meta_table_new              = '/Users/songweizhi/Documents/Research/Sponge/5_combined_genomes_407_metadata.txt'
 
 ########################################################################################################################
 

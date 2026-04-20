@@ -38,18 +38,18 @@ def subset_df(file_in, rows_to_keep_file, cols_to_keep_file, sep_symbol, row_nam
 ########################################################################################################################
 
 # file in
-# enriched_fun_txt    = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/13_enrich/arCOG_summary_enriched_in_symbionts.txt'
+# enriched_fun_txt    = '/Users/songweizhi/Documents/Research/Sponge/13_enrich/arCOG_summary_enriched_in_symbionts.txt'
 # skip_first_row      = True
-# df_file_in          = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy.txt'
+# df_file_in          = '/Users/songweizhi/Documents/Research/Sponge/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy.txt'
 
 # file out
-# df_file_out         = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy_enriched.txt'
-# df_file_out_itol    = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy_enriched.txt'
+# df_file_out         = '/Users/songweizhi/Documents/Research/Sponge/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy_enriched.txt'
+# df_file_out_itol    = '/Users/songweizhi/Documents/Research/Sponge/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy_enriched.txt'
 
 ########################################################################################################################
 
 # file in
-enriched_fun_txt    = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/13_enrich/arCOG_summary_enriched_in_symbionts.txt'
+enriched_fun_txt    = '/Users/songweizhi/Documents/Research/Sponge/13_enrich/arCOG_summary_enriched_in_symbionts.txt'
 skip_first_row      = True
 df_file_in          = '/Users/songweizhi/Documents/Research/Sponge/13_enrich/6_combined_genomes_dereplicated_207_faa_arCOG_id_copy.txt'
 

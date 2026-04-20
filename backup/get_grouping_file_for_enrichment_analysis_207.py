@@ -2,11 +2,11 @@
 ########################################################################################################################
 
 # file in
-metadata_txt    = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/iTOL_files/for_iTOL_lifestyle.txt'
-gnm_id_txt      = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/6_combined_genomes_dereplicated_207_id.txt'
+metadata_txt    = '/Users/songweizhi/Documents/Research/Sponge/iTOL_files/for_iTOL_lifestyle.txt'
+gnm_id_txt      = '/Users/songweizhi/Documents/Research/Sponge/6_combined_genomes_dereplicated_207_id.txt'
 
 # file out
-grouping_txt    = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/6_combined_genomes_dereplicated_207_grouping_enrich.txt'
+grouping_txt    = '/Users/songweizhi/Documents/Research/Sponge/6_combined_genomes_dereplicated_207_grouping_enrich.txt'
 
 ########################################################################################################################
 

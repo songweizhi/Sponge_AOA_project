@@ -13,8 +13,8 @@ def sep_path_basename_ext(file_in):
 ########################################################################################################################
 
 # # file in
-# gapseq_wd       = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/GapSeq_wd'
-# gnm_host_txt    = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/iTOL_files/for_iTOL_lifestyle.txt'
+# gapseq_wd       = '/Users/songweizhi/Documents/Research/Sponge/GapSeq_wd'
+# gnm_host_txt    = '/Users/songweizhi/Documents/Research/Sponge/iTOL_files/for_iTOL_lifestyle.txt'
 # presence_min    = 3
 # presence_max    = 200
 
@@ -31,14 +31,14 @@ gnm_group_main_symbionts_clades.txt
 '''
 
 # file in
-gapseq_wd       = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/GapSeq_wd'
-gnm_group_txt   = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/12_PhyloBiAssoc_wd/gnm_group_main_symbionts_clade1_18.txt'
+gapseq_wd       = '/Users/songweizhi/Documents/Research/Sponge/GapSeq_wd'
+gnm_group_txt   = '/Users/songweizhi/Documents/Research/Sponge/12_PhyloBiAssoc_wd/gnm_group_main_symbionts_clade1_18.txt'
 presence_min    = 3
 presence_max    = 200
 
 # file out
-ignored_pwy_txt = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/12_PhyloBiAssoc_wd/ignored_pwy.txt'
-op_data_matrix  = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/12_PhyloBiAssoc_wd/gapseq_pwy_df_gnm_grouped_by_major_symbionts_clade1_18.txt'
+ignored_pwy_txt = '/Users/songweizhi/Documents/Research/Sponge/12_PhyloBiAssoc_wd/ignored_pwy.txt'
+op_data_matrix  = '/Users/songweizhi/Documents/Research/Sponge/12_PhyloBiAssoc_wd/gapseq_pwy_df_gnm_grouped_by_major_symbionts_clade1_18.txt'
 
 ########################################################################################################################
 
@@ -129,11 +129,11 @@ print(PhyloBiAssoc_cmd)
 
 '''
 BioSAK PhyloBiAssoc -t demo.tre -d demo.txt
-cd /Users/songweizhi/Documents/Research/Sponge_AOA_project/12_ALE_wd
-TreeSAK PhyloBiAssoc -i /Users/songweizhi/Documents/Research/Sponge_AOA_project/11_ALE_wd/OMA_cov85_213_top25_BMGE.rooted.treefile -d op_data_matrix.txt
+cd /Users/songweizhi/Documents/Research/Sponge/12_ALE_wd
+TreeSAK PhyloBiAssoc -i /Users/songweizhi/Documents/Research/Sponge/11_ALE_wd/OMA_cov85_213_top25_BMGE.rooted.treefile -d op_data_matrix.txt
 
-cd /Users/songweizhi/Documents/Research/Sponge_AOA_project/12_ALE_wd
-TreeSAK PhyloBiAssoc -t /Users/songweizhi/Documents/Research/Sponge_AOA_project/11_ALE_wd/OMA_cov85_213_top25_BMGE.rooted.treefile -d /Users/songweizhi/Documents/Research/Sponge_AOA_project/12_PhyloBiAssoc_wd/gapseq_pwy_df_gnm_grouped_by_major_symbionts_clades.txt -o PhyloBiAssoc_wd_gnm_grouped_by_major_symbionts_clades
+cd /Users/songweizhi/Documents/Research/Sponge/12_ALE_wd
+TreeSAK PhyloBiAssoc -t /Users/songweizhi/Documents/Research/Sponge/11_ALE_wd/OMA_cov85_213_top25_BMGE.rooted.treefile -d /Users/songweizhi/Documents/Research/Sponge/12_PhyloBiAssoc_wd/gapseq_pwy_df_gnm_grouped_by_major_symbionts_clades.txt -o PhyloBiAssoc_wd_gnm_grouped_by_major_symbionts_clades
 
 '''
 

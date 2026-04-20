@@ -72,7 +72,7 @@ for each_line in open(sponge_taxa_txt):
         if each_rank.startswith('g__'):
             if each_rank != 'g__':
                 sponge_genus_with_aoa_set.add(each_rank)
-# print('Sponge_AOA_project taxa with AOA (%s)\t%s' % (len(sponge_genus_with_aoa_set), ','.join(sponge_genus_with_aoa_set)))
+# print('Sponge taxa with AOA (%s)\t%s' % (len(sponge_genus_with_aoa_set), ','.join(sponge_genus_with_aoa_set)))
 # print('g__Crambe' in sponge_genus_with_aoa_set)
 
 # get refseq_to_keep_set

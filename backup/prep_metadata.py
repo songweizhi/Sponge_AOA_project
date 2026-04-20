@@ -78,7 +78,7 @@ def get_gnm_to_biosample_dict(meta_1, prokaryotes_txt, gtdb_meta_data_txt):
 
 ########################################################################################################################
 
-wd = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/2_metadata'
+wd = '/Users/songweizhi/Documents/Research/Sponge/2_metadata'
 
 # file in
 meta_1                                  = '%s/0_metadata.txt'                                        % wd
@@ -94,8 +94,8 @@ sponge_taxonomy_txt                     = '%s/Sponge_full_lineage_GTDB_format.tx
 meta_db_genome                          = '%s/Ar_50_5_taxonomy.txt'                                  % wd
 host_group_color                        = '%s/group_color.txt'                                       % wd
 gtdb_meta_data_txt                      = '/Users/songweizhi/DB/GTDB_r214/ar53_metadata_r214.tsv'
-gnm_id_txt_207                          = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/6_combined_genomes_dereplicated_207_id.txt'
-gnm_gc_txt                              = '/Users/songweizhi/Documents/Research/Sponge_AOA_project/5_combined_genomes_407_gc.txt'
+gnm_id_txt_207                          = '/Users/songweizhi/Documents/Research/Sponge/6_combined_genomes_dereplicated_207_id.txt'
+gnm_gc_txt                              = '/Users/songweizhi/Documents/Research/Sponge/5_combined_genomes_407_gc.txt'
 
 # file out
 meta_final                              = '%s/0_metadata_final.txt'                                  % wd

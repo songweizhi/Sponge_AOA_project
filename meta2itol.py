@@ -26,10 +26,10 @@ def colorstrip_col(metadata_txt, interested_col, interested_colorstrip_col_txt, 
 
 ########################################################################################################################
 
-metadata_update_date        = '20260408'
+metadata_update_date        = '20260419'
 
 # file in
-meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s.txt'   % metadata_update_date
+meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s.txt'           % metadata_update_date
 color_code_sponge_txt       = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_sponge.txt'
 color_code_genome_txt       = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_symbiont.txt'
 color_code_habitat_txt      = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_habitat.txt'
@@ -43,8 +43,8 @@ colorstrip_cols             = 'Contributor,Source'
 force_create_op_dir         = True
 
 # 2284
-gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/gnm_id_2287.txt'
-itol_file_dir               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s_iTOL_2287' % metadata_update_date
+gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2409.txt'
+itol_file_dir               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s_iTOL_2409'     % metadata_update_date
 
 ########################################################################################################################
 
@@ -162,9 +162,11 @@ for each_gnm in open(meta_data_txt):
             host_group              = each_gnm_split[col_index['Host_Group']]
             host_taxon_str_split    = each_gnm_split[col_index['Host_Taxon']].split(';')
             gnm_size                = each_gnm_split[col_index['Size_Mbp_adjusted_by_cpl']]
-            gc_content              = each_gnm_split[col_index['GC']]
             gnm_dbscc               = each_gnm_split[col_index['DBSCC']]
             gnm_deepsea             = each_gnm_split[col_index['Deepsea_2']]
+            gnm_taxon               = each_gnm_split[col_index['GTDB_Taxon_r232']]
+            gnm_completeness        = each_gnm_split[col_index['Completeness']]
+            gnm_gc                  = each_gnm_split[col_index['GC']]
 
             if gnm_deepsea in ['Deep-sea', 'deep-sea']:
                 gnm_deepsea_txt_handle.write(gnm_id + '\n')
@@ -192,7 +194,6 @@ for each_gnm in open(meta_data_txt):
             gnm_host_group_txt_handle.write('%s\t%s\n' % (gnm_id, host_group))
 
             # write out genome taxon
-            gnm_taxon = each_gnm_split[col_index['GTDB_Taxon_r226']]
             gnm_taxon_split = gnm_taxon.split(';')
             gnm_family = gnm_taxon_split[4]
             gnm_genus  = gnm_taxon_split[5]
@@ -226,10 +227,9 @@ for each_gnm in open(meta_data_txt):
                 gnm_dbscc_genus_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_genus))
 
             # write out size, completeness
-            gnm_completeness_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Completeness']]))
-            gnm_size_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Size_Mbp_adjusted_by_cpl']]))
-            gnm_gc_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['GC']]))
-
+            gnm_completeness_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_completeness))
+            gnm_size_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_size))
+            gnm_gc_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_gc))
             gnm_habitat_1_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_1']]))
             gnm_habitat_2_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_2']]))
             gnm_habitat_3_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_3']]))
@@ -401,7 +401,7 @@ for interested_gnm in gnm_to_genus_dict:
         host_f  = host_f  + '_' * (max_taxon_name_len_dict['f']  - len(host_f))
         host_g  = host_g  + '_' * (max_taxon_name_len_dict['g']  - len(host_g))
         host_s  = host_s  + '_' * (max_taxon_name_len_dict['s']  - len(host_s))
-        str_to_write = '%s__;%s;%s;%s;%s;%s;%s' % (str_to_write, host_c, host_sc, host_o, host_f, host_g, host_s)
+        str_to_write          = '%s__;%s;%s;%s;%s;%s;%s' % (str_to_write,          host_c, host_sc, host_o, host_f, host_g, host_s)
         str_to_write_same_len = '%s__;%s;%s;%s;%s;%s;%s' % (str_to_write_same_len, host_c, host_sc, host_o, host_f, host_g, host_s)
 
     if cols_to_include_in_label != '':
