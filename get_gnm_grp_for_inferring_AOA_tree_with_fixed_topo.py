@@ -1,9 +1,9 @@
 
 ########################################################################################################################
 
-meta_data_txt   = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_20260130.txt'
-gnm_id_txt      = '/Users/songweizhi/Desktop/Sponge_r226/08_Host_specificity/Nitrosopumilaceae_AOA_1369_dRep95_659.txt'
-gnm_grp_txt     = '/Users/songweizhi/Desktop/Sponge_r226/08_Host_specificity/genome_group.txt'
+meta_data_txt   = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_20260423.txt'
+gnm_id_txt      = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2395.txt'
+gnm_grp_txt     = '/Users/songweizhi/Desktop/Sponge_r226/08_Host_specificity/genome_group_.txt'
 
 ########################################################################################################################
 
@@ -24,9 +24,6 @@ for each_gnm in open(meta_data_txt):
             gnm_tax_str   = each_gnm_split[col_index['GTDB_Taxon_r226']]
             gnm_genus = gnm_tax_str.split(';')[5]
             gnm_dbscc = each_gnm_split[col_index['DBSCC']]
-
-            if gnm_id in ['GCA011774755_1', 'GCA033722055_1', 'GCA041609755_1', 'GCA050749365_1', 'GCA964460675_1']:
-                print(gnm_genus, gnm_dbscc)
 
             if gnm_dbscc != 'na':
                 if gnm_dbscc not in grp_to_gnm_dict:

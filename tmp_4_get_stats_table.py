@@ -1,13 +1,15 @@
 
-meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_20260419.txt'
-gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2409.txt'
+meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_20260423.txt'
+gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2395.txt'
 
 
 gnm_id_set = set()
 for each_gnm in open(gnm_id_txt):
     gnm_id_set.add(each_gnm.strip().split()[0])
 
-
+host_genus_to_full_lineage_dict = dict()
+host_species_to_dbscc_dict = dict()
+dbscc_to_genus_dict = dict()
 jl_host_taxa_dict = dict()
 jl_sample_set = set()
 tmp_dict = dict()
@@ -42,11 +44,7 @@ for each_gnm in open(meta_data_txt):
             gnm_habitat_2        = each_gnm_split[col_index['Habitat_2']]
             gnm_habitat_3        = each_gnm_split[col_index['Habitat_3']]
             gnm_habitat_4        = each_gnm_split[col_index['Habitat_4']]
-
-            if gnm_id.startswith('JL'):
-                jl_sample_id = gnm_id.split('_bin')[0]
-                jl_sample_set.add(jl_sample_id)
-                jl_host_taxa_dict[gnm_id] = '%s\t%s' % (jl_sample_id, host_taxon_str)
+            gnm_dbscc            = each_gnm_split[col_index['DBSCC']]
 
             aoa_f_r232 = ''
             aoa_g_r232 = ''
@@ -64,6 +62,26 @@ for each_gnm in open(meta_data_txt):
 
             ##################################
 
+            if host_species not in ['Freeliving', 'Sponge', 'Coral']:
+
+                # print(host_species)
+                # host_genus = ''
+                # for hr in host_taxon_str_split:
+                #     if hr.startswith('g__'):
+                #         host_genus = hr
+                # print(host_genus)
+
+                if ' sp.' not in host_species:
+                    if gnm_dbscc != 'na':
+                        if host_taxon_str not in host_species_to_dbscc_dict:
+                            host_species_to_dbscc_dict[host_taxon_str] = set()
+                        host_species_to_dbscc_dict[host_taxon_str].add(gnm_dbscc)
+
+
+
+
+
+            ##################################
 
             ##################################
 
@@ -85,6 +103,7 @@ for each_gnm in open(meta_data_txt):
             # if gnm_habitat_3 not in tmp_dict:
             #     tmp_dict[gnm_habitat_3] = 0
             # tmp_dict[gnm_habitat_3] += 1
+
             ##################################
 
             # # get gnm_habitat_dict at genus level
@@ -167,13 +186,15 @@ for each_gnm in open(meta_data_txt):
 # print(aoa_f_stats_dict)
 
 
+print('==================================================')
+
 print(tmp_dict)
 for i in tmp_dict:
     print(i, tmp_dict[i], sep='\t')
-
 print('n: %s' % n)
 print('m: %s' % m)
 
+print('==================================================\n')
 
 
 
@@ -183,4 +204,7 @@ for i in jl_host_taxa_dict:
 
 
 
-
+for i in sorted(list(host_species_to_dbscc_dict.keys())):
+    value_list_sorted = sorted(list(host_species_to_dbscc_dict[i]))
+    if len(value_list_sorted) > 1:
+        print(','.join(value_list_sorted), i, sep='\t')

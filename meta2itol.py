@@ -26,7 +26,7 @@ def colorstrip_col(metadata_txt, interested_col, interested_colorstrip_col_txt, 
 
 ########################################################################################################################
 
-metadata_update_date        = '20260419'
+metadata_update_date        = '20260423'
 
 # file in
 meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s.txt'           % metadata_update_date
@@ -36,15 +36,15 @@ color_code_habitat_txt      = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata
 color_code_dbscc_txt        = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_DBSCCs.txt'
 color_code_host_cate_txt    = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_Host_Group.txt'
 cols_to_include_in_label    = 'habitat_for_labelling,Habitat_Depth,Location'
-cols_to_include_in_label    = 'habitat_for_labelling,Location'
+cols_to_include_in_label    = 'habitat_for_labelling,Host_Species,Location'
 fixed_taxon_label_list      = ['f__Nitrososphaeraceae', 'f__Nitrosocaldaceae', 'f__UBA213']
 include_host_tax_in_label   = False
 colorstrip_cols             = 'Contributor,Source'
 force_create_op_dir         = True
 
-# 2284
-gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2409.txt'
-itol_file_dir               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s_iTOL_2409'     % metadata_update_date
+# 2395
+gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2383.txt'
+itol_file_dir               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s_iTOL_2383'     % metadata_update_date
 
 ########################################################################################################################
 

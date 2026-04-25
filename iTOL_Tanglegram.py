@@ -61,7 +61,7 @@ def tanglegram(symbiont_meta_data_txt, host_tree_file, color_code_symbiont_txt, 
 
     ########################################################################################################################
 
-    if connect_sym_info_col in ['GTDB_Taxon_r226']:
+    if connect_sym_info_col in ['GTDB_Taxon_r232']:
         connect_sym_info_col_is_tax = True
     if connect_sym_info_col in ['DBSCC']:
         connect_sym_info_col_is_tax = False
@@ -103,7 +103,7 @@ def tanglegram(symbiont_meta_data_txt, host_tree_file, color_code_symbiont_txt, 
         else:
             gnm_id                  = each_gnm_split[col_index['Genome']]
             connection_info_col_str = each_gnm_split[col_index[connect_sym_info_col]]
-            gnm_tax                 = each_gnm_split[col_index['GTDB_Taxon_r226']]
+            gnm_tax                 = each_gnm_split[col_index['GTDB_Taxon_r232']]
             host_taxon_str          = each_gnm_split[col_index['Host_Taxon']]
             host_taxon_str_split    = host_taxon_str.split(';')
             host_taxon_dict[gnm_id] = host_taxon_str
@@ -373,8 +373,10 @@ def tanglegram(symbiont_meta_data_txt, host_tree_file, color_code_symbiont_txt, 
 
 ########################################################################################################################
 
+metadata_update_date                = '20260423'
+
 # file in
-meta_data_txt                       = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_20260408.txt'
+meta_data_txt                       = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s.txt'           % metadata_update_date
 tree_file                           = '/Users/songweizhi/Desktop/Sponge_r226/07_Sponge_tree/RefSeqs_with_AOA_COI_iden95_g_representatives_JL_wd_WoRMS/Sponge_phylogeny_Maria_topo_genus_level_18S_COI.tree'
 color_code_genome_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_symbiont.txt'
 color_code_sponge_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_sponge.txt'
@@ -383,30 +385,40 @@ color_link_by_host                  = True              # True or False
 color_link_by_host_rank             = 'o'
 color_link_by_symbiont              = False             # True or False
 min_symbiont_per_host               = 0
-
-# plot links by host group
-connection_host_tax_list            = [None, 'o__Dictyoceratida', 'o__Homosclerophorida', 'o__Lyssacinosida', 'o__Tetractinellida', 'o__Verongiida', 'f__Ianthellidae', 'g__Agelas', 'g__Coscinoderma', 'g__Stylissa']
+force_create_op_dir                 = True
 
 # plot links by symbioint DBSCC
-connect_sym_info_col                = 'DBSCC'       # GTDB_Taxon_r226 or DBSCC
-connect_sym_interested_dbscc_list   = [None, 'D1', 'D2', 'D3', 'D4a', 'D4b', 'D4c', 'D4d', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10a', 'D10b', 'D10c', 'D10d', 'D4a,D4b,D4c,D5,D6', 'D4a,D5', 'D4b,D4c,D6', 'D4d,D7', 'D10a,D10b,D10c,D10d']
+connect_sym_info_col                = 'DBSCC'       # GTDB_Taxon_r232 or DBSCC
+connect_sym_interested_dbscc_list   = [None, 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11a', 'D11b', 'D11c', 'D11d', 'D11a,D11b,D11c,D11d']
 
 # plot links by symbioint taxa
-connect_sym_info_col                = 'GTDB_Taxon_r226'       # GTDB_Taxon_r226 or DBSCC
-connect_sym_interested_taxon_list   = [None, 'g__Nitrosopumilus', 'g__Cenarchaeum']
+connect_sym_info_col                = 'GTDB_Taxon_r232'       # GTDB_Taxon_r232 or DBSCC
+connect_sym_interested_taxon_list   = ['g__Nitrosopumilus']
+
+# plot links by host group
+connection_host_tax_list            = [None, 'c__Hexactinellida', 'o__Dictyoceratida', 'o__Homosclerophorida', 'o__Lyssacinosida', 'o__Tetractinellida', 'o__Verongiida', 'f__Ianthellidae', 'g__Agelas', 'g__Coscinoderma', 'g__Stylissa']
 
 # file out
-op_dir                              = '/Users/songweizhi/Desktop/Sponge_r226/08_Host_specificity/iTOL_Tanglegrams'
+op_dir                              = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s_iTOL_Tanglegram'     % metadata_update_date
 
 ########################################################################################################################
 
+# create op_dir
+if os.path.isdir(op_dir) is True:
+    if force_create_op_dir is True:
+        os.system('rm -r %s' % op_dir)
+    else:
+        print('Output folder detected, program exited!')
+        exit()
+os.system('mkdir %s' % op_dir)
+
 for connect_sym_interested_dbscc in connect_sym_interested_dbscc_list:
     print('Processing %s' % connect_sym_interested_dbscc)
-    tanglegram(meta_data_txt, tree_file, color_code_genome_txt, color_code_sponge_txt, leaf_label_rank_str, color_link_by_host, color_link_by_symbiont, color_link_by_host_rank, None, min_symbiont_per_host, 'DBSCC', connect_sym_interested_dbscc, op_dir)
+    # tanglegram(meta_data_txt, tree_file, color_code_genome_txt, color_code_sponge_txt, leaf_label_rank_str, color_link_by_host, color_link_by_symbiont, color_link_by_host_rank, None, min_symbiont_per_host, 'DBSCC', connect_sym_interested_dbscc, op_dir)
 
 for connect_sym_interested_taxon in connect_sym_interested_taxon_list:
     print('Processing %s' % connect_sym_interested_taxon)
-    tanglegram(meta_data_txt, tree_file, color_code_genome_txt, color_code_sponge_txt, leaf_label_rank_str, color_link_by_host, color_link_by_symbiont, color_link_by_host_rank, None, min_symbiont_per_host, 'GTDB_Taxon_r226', connect_sym_interested_taxon, op_dir)
+    tanglegram(meta_data_txt, tree_file, color_code_genome_txt, color_code_sponge_txt, leaf_label_rank_str, color_link_by_host, color_link_by_symbiont, color_link_by_host_rank, None, min_symbiont_per_host, 'GTDB_Taxon_r232', connect_sym_interested_taxon, op_dir)
 
 for connection_host_tax in connection_host_tax_list:
     print('Processing %s' % connection_host_tax)
