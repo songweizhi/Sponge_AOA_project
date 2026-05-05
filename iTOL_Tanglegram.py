@@ -412,9 +412,10 @@ if os.path.isdir(op_dir) is True:
         exit()
 os.system('mkdir %s' % op_dir)
 
+
 for connect_sym_interested_dbscc in connect_sym_interested_dbscc_list:
     print('Processing %s' % connect_sym_interested_dbscc)
-    # tanglegram(meta_data_txt, tree_file, color_code_genome_txt, color_code_sponge_txt, leaf_label_rank_str, color_link_by_host, color_link_by_symbiont, color_link_by_host_rank, None, min_symbiont_per_host, 'DBSCC', connect_sym_interested_dbscc, op_dir)
+    tanglegram(meta_data_txt, tree_file, color_code_genome_txt, color_code_sponge_txt, leaf_label_rank_str, color_link_by_host, color_link_by_symbiont, color_link_by_host_rank, None, min_symbiont_per_host, 'DBSCC', connect_sym_interested_dbscc, op_dir)
 
 for connect_sym_interested_taxon in connect_sym_interested_taxon_list:
     print('Processing %s' % connect_sym_interested_taxon)

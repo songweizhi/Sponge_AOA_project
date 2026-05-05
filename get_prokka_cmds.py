@@ -30,10 +30,10 @@ import os
 # prokka_cmds_txt_handle.close()
 
 n = 1
-for each_gnm in open('/Users/songweizhi/Desktop/AOA_genome_r232_uniq_449_uniq_130.txt'):
+for each_gnm in open('/Users/songweizhi/Desktop/157.txt'):
     gnm_id = each_gnm.strip()
-    prokka_cmd     = 'BioSAK hpc4 -q amd -a marmolecol -wt 02:59:59 -t 120 -conda mybase2 -n prokka_%s -c "prokka --force --compliant --metagenome --cpus 1 --kingdom Archaea --prefix %s --locustag %s --strain %s --outdir %s_prokka_wd %s.fna"' % (n, gnm_id, gnm_id, gnm_id, gnm_id, gnm_id)
-    prokka_cmd     = 'prokka --force --compliant --metagenome --cpus 1 --kingdom Archaea --prefix %s --locustag %s --strain %s --outdir %s_prokka_wd %s.fna' % (gnm_id, gnm_id, gnm_id, gnm_id, gnm_id)
+    prokka_cmd     = 'BioSAK hpc4 -q amd -a marmolecol -wt 02:59:59 -t 1 -conda prokka -n prokka_%s -c "prokka --force --compliant --metagenome --cpus 1 --kingdom Archaea --prefix %s --locustag %s --strain %s --outdir %s_prokka_wd %s.fna"' % (n, gnm_id, gnm_id, gnm_id, gnm_id, gnm_id)
+    # prokka_cmd     = 'prokka --force --compliant --metagenome --cpus 1 --kingdom Archaea --prefix %s --locustag %s --strain %s --outdir %s_prokka_wd %s.fna' % (gnm_id, gnm_id, gnm_id, gnm_id, gnm_id)
     print(prokka_cmd)
     n += 1
 

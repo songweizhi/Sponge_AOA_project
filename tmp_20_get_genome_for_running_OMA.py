@@ -55,13 +55,5 @@ for each_gnm in open(meta_data_txt):
                     from_interested_taxa = True
             if from_interested_taxa is True:
                 print('mv %s.fa 000/' % gnm_id)
-
-
                 n += 1
-
 print(n)
-'''
-f__Nitrosocaldaceae_____GCA938030895_1
-f__Nitrosocaldaceae_____GCA046299465_1
-
-'''

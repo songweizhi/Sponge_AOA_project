@@ -229,7 +229,7 @@ for each_gnm in open(meta_data_txt):
             # write out size, completeness
             gnm_completeness_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_completeness))
             gnm_size_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_size))
-            gnm_gc_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_gc))
+            gnm_gc_txt_handle.write('%s\t%s\n' % (gnm_id, (float(gnm_gc)-25)))
             gnm_habitat_1_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_1']]))
             gnm_habitat_2_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_2']]))
             gnm_habitat_3_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_3']]))
@@ -435,7 +435,7 @@ biosak_cmd_habitat_4            = 'TreeSAK iTOL -ColorStrip -strip_width 300 -sh
 biosak_cmd_dbscc                = 'TreeSAK iTOL -ColorStrip -show_label -hide_legend -lg %s -gc %s -lt DBSCC -o %s'                             % (gnm_dbscc_txt,  color_code_dbscc_txt, gnm_dbscc_txt_itol)
 biosak_cmd_cpl                  = 'TreeSAK iTOL -SimpleBar -lv %s -scale 0-25-50-75-100 -lt Completeness -o %s'                                 % (gnm_completeness_txt, gnm_completeness_txt_itol)
 biosak_cmd_size                 = 'TreeSAK iTOL -SimpleBar -lv %s -lt Genome_size -scale 0-1-2-3 -o %s'                                         % (gnm_size_txt, gnm_size_txt_itol)
-biosak_cmd_gc                   = 'TreeSAK iTOL -SimpleBar -lv %s -lt GC_content -scale 0-25-50-75-100 -o %s'                                   % (gnm_gc_txt, gnm_gc_txt_itol)
+biosak_cmd_gc                   = 'TreeSAK iTOL -SimpleBar -lv %s -lt GC_content -scale 25-50-75 -o %s'                                   % (gnm_gc_txt, gnm_gc_txt_itol)
 biosak_cmd_deepsea              = 'TreeSAK iTOL -BinaryID -id %s -lt Deep-sea -BinaryColor "#2B7FFF" -o %s'                                     % (gnm_deepsea_txt, gnm_deepsea_txt_itol)
 biosak_cmd_genus_color_clade    = 'TreeSAK iTOL -ColorClade -lg %s -gc %s -o %s'                                                                % (gnm_genus_txt, color_code_genome_txt, gnm_genus_colorclade_itol)
 biosak_cmd_genus_color_label    = 'TreeSAK iTOL -ColorLabel -lg %s -gc %s -o %s'                                                                % (gnm_genus_txt, color_code_genome_txt, gnm_genus_colorlabel_itol)
