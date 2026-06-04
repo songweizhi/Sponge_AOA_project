@@ -36,7 +36,7 @@ def tanglegram(symbiont_meta_data_txt, host_tree_file, color_code_symbiont_txt, 
 
     # tanglegram tree scaling
     tree_scale_h                = 1
-    tree_scale_v                = 8
+    tree_scale_v                = 7.3
 
     # tanglegram tree label
     show_leaf_label             = 1

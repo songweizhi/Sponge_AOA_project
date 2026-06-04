@@ -17,16 +17,6 @@ gnm_id_txt_drep95                   = '/Users/songweizhi/Desktop/Sponge_r226/10_
 gnm_id_txt_drep85                   = '/Users/songweizhi/Desktop/Sponge_r226/10_OMA/AOA_2279_dRep85_317.txt'
 interested_taxa_list                = ['f__Nitrosocaldaceae', 'f__Nitrososphaeraceae', 'g__Nitrosotalea', 'g__TA-20', 'g__JACQFM01', 'g__JBBDNF01', 'g__UBA8516', 'g__Nitrosarchaeum', 'g__Nitrosomaritimum', 'g__Nitrosarchaeum_A', 'g__DRGT01', 'g__CSP1-1', 'g__VHBM01', 'g__Nitrosotenuis', 'g__Nitrosopelagicus']
 
-'''
-'''
-
-
-
-
-
-
-
-
 
 gnm_id_set_drep95 = set()
 for each_gnm in open(gnm_id_txt_drep95):

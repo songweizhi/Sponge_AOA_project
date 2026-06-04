@@ -85,7 +85,7 @@ for each_gnm in open(meta_data_txt):
             biosample_id         = each_gnm_split[col_index['BioSample']]
             biosample_id         = each_gnm_split[col_index['SRA']]
 
-            if gnm_dbscc == 'D10':
+            if gnm_dbscc == 'D11d':
                 print(gnm_id)
 
             aoa_f_r232 = ''
@@ -141,16 +141,6 @@ for each_gnm in open(meta_data_txt):
                     if gnm_id in gnm_set_drep75:
                         oma_gnm_set.add(gnm_id)
 
-
-
-
-
-
-
-
-
-
-
             ############################################################
 
             # if gnm_dbscc in ['D9', 'D10']:
@@ -174,11 +164,6 @@ for each_gnm in open(meta_data_txt):
                     tmp_dict[biosample_id].append(gnm_dbscc)
                     biosample_to_host_species_dict[biosample_id] = host_species
 
-
-
-
-
-
             ##### get family level stats #####
 
             if aoa_f_r232 not in aoa_f_stats_dict:
@@ -201,10 +186,6 @@ for each_gnm in open(meta_data_txt):
                         if host_taxon_str not in host_species_to_dbscc_dict:
                             host_species_to_dbscc_dict[host_taxon_str] = set()
                         host_species_to_dbscc_dict[host_taxon_str].add(gnm_dbscc)
-
-
-
-
 
             ##################################
 
@@ -364,5 +345,4 @@ print('==================================================\n')
 #
 #     itol_cmd = 'TreeSAK iTOL -Heatmap -lm %s -lt Abundance -o %s' % (df_subset_txt, df_subset_txt_itol)
 #     os.system(itol_cmd)
-#
 

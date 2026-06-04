@@ -46,7 +46,6 @@ for each_file in file_list:
 
     if len(matched_des_set) == 0:
         processed_og_num += 1
-        pass
     else:
         if len(matched_cog_list) == 1:
             summary_txt_handle.write('%s\t%s\n' % (og_id, '\t'.join(matched_cog_list[0])))
