@@ -26,25 +26,26 @@ def colorstrip_col(metadata_txt, interested_col, interested_colorstrip_col_txt, 
 
 ########################################################################################################################
 
-metadata_update_date        = '20260423'
+metadata_update_date        = '20260712'
 
 # file in
-meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s.txt'           % metadata_update_date
-color_code_sponge_txt       = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_sponge.txt'
-color_code_genome_txt       = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_symbiont.txt'
-color_code_habitat_txt      = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_habitat.txt'
-color_code_dbscc_txt        = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_DBSCCs.txt'
-color_code_host_cate_txt    = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/color_code_Host_Group.txt'
+meta_data_txt               = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/AOA_metadata_%s.txt' % metadata_update_date
+color_code_sponge_txt       = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/color_code_sponge.txt'
+color_code_genome_txt       = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/color_code_symbiont.txt'
+color_code_habitat_txt      = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/color_code_habitat.txt'
+color_code_dbscc_txt        = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/color_code_DBSCCs.txt'
+color_code_host_cate_txt    = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/color_code_Host_Group.txt'
 cols_to_include_in_label    = 'habitat_for_labelling,Habitat_Depth,Location'
 cols_to_include_in_label    = 'habitat_for_labelling,Host_Species,Location'
 fixed_taxon_label_list      = ['f__Nitrososphaeraceae', 'f__Nitrosocaldaceae', 'f__UBA213']
+fixed_taxon_label_list      = []
 include_host_tax_in_label   = False
 colorstrip_cols             = 'Contributor,Source'
 force_create_op_dir         = True
 
 # 2395
-gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2383.txt'
-itol_file_dir               = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_%s_iTOL_2383'     % metadata_update_date
+gnm_id_txt                  = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/AOA_r232_2383.txt'
+itol_file_dir               = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/AOA_metadata_%s_iTOL_2383_test'     % metadata_update_date
 
 ########################################################################################################################
 
@@ -79,8 +80,10 @@ gnm_habitat_4_txt           = '%s/tmp/gnm_habitat_4.txt'            % itol_file_
 gnm_dbscc_txt               = '%s/tmp/gnm_DBSCC.txt'                % itol_file_dir
 gnm_dbscc_genus_txt         = '%s/tmp/gnm_DBSCC_and_genus.txt'      % itol_file_dir
 gnm_deepsea_txt             = '%s/tmp/gnm_deepsea_Binary.txt'       % itol_file_dir
+sponge_class_txt            = '%s/tmp/sponge_class.txt'             % itol_file_dir
 gnm_deepsea_txt_for_strip   = '%s/tmp/gnm_deepsea.txt'              % itol_file_dir
 
+sponge_class_txt_itol       = '%s/iTOL_sponge_class.txt'            % itol_file_dir
 gnm_genus_colorclade_itol   = '%s/iTOL_gnm_genus_ColorClade.txt'    % itol_file_dir
 gnm_genus_colorlabel_itol   = '%s/iTOL_gnm_genus_ColorLabel.txt'    % itol_file_dir
 gnm_genus_txt_itol          = '%s/iTOL_gnm_genus_Range.txt'         % itol_file_dir
@@ -122,6 +125,7 @@ for interested_col in colorstrip_col_list:
 ########################################################################################################################
 
 # write out
+sponge_class_txt_handle             = open(sponge_class_txt, 'w')
 gnm_genus_txt_handle                = open(gnm_genus_txt, 'w')
 gnm_family_txt_handle               = open(gnm_family_txt, 'w')
 gnm_to_host_s_txt_handle            = open(gnm_to_host_s_txt, 'w')
@@ -160,13 +164,25 @@ for each_gnm in open(meta_data_txt):
         if gnm_id in gnm_id_set:
             host_species            = each_gnm_split[col_index['Host_Species']]
             host_group              = each_gnm_split[col_index['Host_Group']]
-            host_taxon_str_split    = each_gnm_split[col_index['Host_Taxon']].split(';')
+            host_taxon_str          = each_gnm_split[col_index['Host_Taxon']]
+            host_taxon_str_split    = host_taxon_str.split(';')
             gnm_size                = each_gnm_split[col_index['Size_Mbp_adjusted_by_cpl']]
             gnm_dbscc               = each_gnm_split[col_index['DBSCC']]
             gnm_deepsea             = each_gnm_split[col_index['Deepsea_2']]
             gnm_taxon               = each_gnm_split[col_index['GTDB_Taxon_r232']]
             gnm_completeness        = each_gnm_split[col_index['Completeness']]
             gnm_gc                  = each_gnm_split[col_index['GC']]
+
+            # write out sponge class
+            if 'p__Porifera' in host_taxon_str:
+                if 'c__Demospongiae' in host_taxon_str:
+                    sponge_class_txt_handle.write('%s\tDemospongiae\n' % gnm_id)
+                elif 'c__Hexactinellida' in host_taxon_str:
+                    sponge_class_txt_handle.write('%s\tHexactinellida\n' % gnm_id)
+                elif 'c__Homoscleromorpha' in host_taxon_str:
+                    sponge_class_txt_handle.write('%s\tHomoscleromorpha\n' % gnm_id)
+                else:
+                    pass
 
             if gnm_deepsea in ['Deep-sea', 'deep-sea']:
                 gnm_deepsea_txt_handle.write(gnm_id + '\n')
@@ -229,7 +245,7 @@ for each_gnm in open(meta_data_txt):
             # write out size, completeness
             gnm_completeness_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_completeness))
             gnm_size_txt_handle.write('%s\t%s\n' % (gnm_id, gnm_size))
-            gnm_gc_txt_handle.write('%s\t%s\n' % (gnm_id, (float(gnm_gc)-25)))
+            #gnm_gc_txt_handle.write('%s\t%s\n' % (gnm_id, (float(gnm_gc)-25)))
             gnm_habitat_1_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_1']]))
             gnm_habitat_2_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_2']]))
             gnm_habitat_3_txt_handle.write('%s\t%s\n' % (gnm_id, each_gnm_split[col_index['Habitat_3']]))
@@ -274,6 +290,7 @@ for each_gnm in open(meta_data_txt):
                         gnm_to_host_sc_txt_handle.write('%s\t%s\n' % (gnm_id, each_host_r))
                     elif each_host_r.startswith('c__'):
                         gnm_to_host_c_txt_handle.write('%s\t%s\n' % (gnm_id, each_host_r))
+sponge_class_txt_handle.close()
 gnm_genus_txt_handle.close()
 gnm_family_txt_handle.close()
 gnm_to_host_s_txt_handle.close()
@@ -420,6 +437,7 @@ biosak_cmd_genus_range          = 'TreeSAK iTOL -ColorRange -lg %s -o %s -gc %s 
 biosak_cmd_family_range         = 'TreeSAK iTOL -ColorRange -lg %s -o %s -gc %s -lt Family'                                                     % (gnm_family_txt, gnm_family_txt_itol, color_code_genome_txt)
 biosak_cmd_genus_label          = 'TreeSAK iTOL -Labels -ll %s -o %s'                                                                           % (gnm_label_txt, gnm_label_txt_itol)
 biosak_cmd_genus_label_long     = 'TreeSAK iTOL -Labels -ll %s -o %s'                                                                           % (gnm_label_txt_long, gnm_label_txt_itol_long)
+biosak_cmd_sponge_class_strip   = 'TreeSAK iTOL -ColorStrip -strip_width 100 -lg %s -gc %s -lt "SpongeClass" -o %s'                             % (sponge_class_txt,  color_code_sponge_txt, sponge_class_txt_itol)
 biosak_cmd_deepsea_strip        = 'TreeSAK iTOL -ColorStrip -strip_width 100 -hide_legend -lg %s -gc %s -lt "Deep-sea" -o %s'                   % (gnm_deepsea_txt_for_strip,  color_code_habitat_txt, gnm_deepsea_txt_itol_strip)
 biosak_cmd_host_s               = 'TreeSAK iTOL -ColorStrip -strip_width 300 -hide_legend -show_label -lg %s -gc %s -lt "Host Species" -o %s'   % (gnm_to_host_s_txt,  color_code_sponge_txt, gnm_to_host_s_txt_itol)
 biosak_cmd_host_g               = 'TreeSAK iTOL -ColorStrip -strip_width 300 -hide_legend -show_label -lg %s -gc %s -lt "Host genus" -o %s'     % (gnm_to_host_g_txt,  color_code_sponge_txt, gnm_to_host_g_txt_itol)
@@ -435,11 +453,12 @@ biosak_cmd_habitat_4            = 'TreeSAK iTOL -ColorStrip -strip_width 300 -sh
 biosak_cmd_dbscc                = 'TreeSAK iTOL -ColorStrip -show_label -hide_legend -lg %s -gc %s -lt DBSCC -o %s'                             % (gnm_dbscc_txt,  color_code_dbscc_txt, gnm_dbscc_txt_itol)
 biosak_cmd_cpl                  = 'TreeSAK iTOL -SimpleBar -lv %s -scale 0-25-50-75-100 -lt Completeness -o %s'                                 % (gnm_completeness_txt, gnm_completeness_txt_itol)
 biosak_cmd_size                 = 'TreeSAK iTOL -SimpleBar -lv %s -lt Genome_size -scale 0-1-2-3 -o %s'                                         % (gnm_size_txt, gnm_size_txt_itol)
-biosak_cmd_gc                   = 'TreeSAK iTOL -SimpleBar -lv %s -lt GC_content -scale 25-50-75 -o %s'                                   % (gnm_gc_txt, gnm_gc_txt_itol)
+biosak_cmd_gc                   = 'TreeSAK iTOL -SimpleBar -lv %s -lt GC_content -scale 25-50-75 -o %s'                                         % (gnm_gc_txt, gnm_gc_txt_itol)
 biosak_cmd_deepsea              = 'TreeSAK iTOL -BinaryID -id %s -lt Deep-sea -BinaryColor "#2B7FFF" -o %s'                                     % (gnm_deepsea_txt, gnm_deepsea_txt_itol)
 biosak_cmd_genus_color_clade    = 'TreeSAK iTOL -ColorClade -lg %s -gc %s -o %s'                                                                % (gnm_genus_txt, color_code_genome_txt, gnm_genus_colorclade_itol)
 biosak_cmd_genus_color_label    = 'TreeSAK iTOL -ColorLabel -lg %s -gc %s -o %s'                                                                % (gnm_genus_txt, color_code_genome_txt, gnm_genus_colorlabel_itol)
 
+os.system(biosak_cmd_sponge_class_strip)
 os.system(biosak_cmd_host_group)
 os.system(biosak_cmd_genus_label)
 os.system(biosak_cmd_genus_label_long)

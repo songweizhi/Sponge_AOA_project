@@ -10,11 +10,11 @@ gnm_id_set = set()
 for each_gnm in open(gnm_id_txt):
     gnm_id_set.add(each_gnm.strip().split()[0])
 
-
+m = 0
+n = 0
 habitat_set= set()
 habitat_dict_f = dict()
 habitat_dict_Nitrosopumilaceae = dict()
-
 life_style_dict_f = dict()
 life_style_dict_Nitrosopumilaceae = dict()
 host_species_set = set()
@@ -52,6 +52,19 @@ for each_gnm in open(meta_data_txt):
                     aoa_f_r232 = each_r
                 if each_r.startswith('g__'):
                     aoa_g_r232 = each_r
+
+            ############################################################################################################
+
+            if host_grp in ['Freeliving']:
+                m += 1
+                if 'f__Nitrososphaeraceae' in gnm_taxon_r232:
+                    print('mv %s.fna f__Nitrososphaeraceae/' % gnm_id)
+            else:
+                n += 1
+
+
+            ############################################################################################################
+
 
             ############################################################################################################
 
@@ -134,16 +147,20 @@ for each_gnm in open(meta_data_txt):
 #     for each_habitat in habitat_list_sorted:
 #         value_list.append(str(current_dict.get(each_habitat, 0)))
 #     print('\t'.join(value_list))
-#
+
+# print('-----------------------------------------------------------------------------------------------------------------')
+# habitat_list_sorted = sorted(list(habitat_set))
+# print('\t%s'% '\t'.join(habitat_list_sorted))
+# for each_g in habitat_dict_Nitrosopumilaceae:
+#     current_dict = habitat_dict_Nitrosopumilaceae[each_g]
+#     value_list = [each_g]
+#     for each_habitat in habitat_list_sorted:
+#         value_list.append(str(current_dict.get(each_habitat, 0)))
+#     print('\t'.join(value_list))
+
 # print('-----------------------------------------------------------------------------------------------------------------')
 
-habitat_list_sorted = sorted(list(habitat_set))
-print('\t%s'% '\t'.join(habitat_list_sorted))
-for each_g in habitat_dict_Nitrosopumilaceae:
-    current_dict = habitat_dict_Nitrosopumilaceae[each_g]
-    value_list = [each_g]
-    for each_habitat in habitat_list_sorted:
-        value_list.append(str(current_dict.get(each_habitat, 0)))
-    print('\t'.join(value_list))
+print(m)
+print(n)
 
-print('-----------------------------------------------------------------------------------------------------------------')
+print(m+n)
