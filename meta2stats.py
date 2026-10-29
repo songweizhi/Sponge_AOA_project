@@ -1,8 +1,8 @@
 
 ########################################################################################################################
 
-meta_data_txt = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_metadata_20260423.txt'
-gnm_id_txt    = '/Users/songweizhi/Desktop/Sponge_r226/00_metadata/AOA_r232_2383.txt'
+meta_data_txt = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/AOA_metadata_20260712.txt'
+gnm_id_txt    = '/Users/songweizhi/Desktop/Sponge_r232/00_metadata/AOA_r232_2383.txt'
 
 ########################################################################################################################
 
@@ -44,6 +44,8 @@ for each_gnm in open(meta_data_txt):
             gnm_habitat_3        = each_gnm_split[col_index['Habitat_3']]
             gnm_habitat_4        = each_gnm_split[col_index['Habitat_4']]
             gnm_dbscc            = each_gnm_split[col_index['DBSCC']]
+            gnm_cpl              = each_gnm_split[col_index['Completeness']]
+            gnm_ctm              = each_gnm_split[col_index['Contamination']]
 
             aoa_f_r232 = ''
             aoa_g_r232 = ''
@@ -55,70 +57,72 @@ for each_gnm in open(meta_data_txt):
 
             ############################################################################################################
 
-            if host_grp in ['Freeliving']:
-                m += 1
-                if 'f__Nitrososphaeraceae' in gnm_taxon_r232:
-                    print('mv %s.fna f__Nitrososphaeraceae/' % gnm_id)
-            else:
-                n += 1
-
+            if 'g__JAHRAL01' in gnm_taxon_r232:
+                if 'Stylissa' in host_species:
+                    print(gnm_id, gnm_cpl, sep='\t')
 
             ############################################################################################################
 
-
-            ############################################################################################################
-
-            if aoa_f_r232 not in life_style_dict_f:
-                life_style_dict_f[aoa_f_r232] = dict()
-                life_style_dict_f[aoa_f_r232]['Free-living'] = 0
-                life_style_dict_f[aoa_f_r232]['Host-associated'] = 0
-            if host_grp not in ['NA', 'Na', 'na']:
-                if host_grp == 'Freeliving':
-                    life_style_dict_f[aoa_f_r232]['Free-living'] += 1
-                else:
-                    life_style_dict_f[aoa_f_r232]['Host-associated'] += 1
-
-            ############################################################################################################
-
-            if aoa_f_r232 == 'f__Nitrosopumilaceae':
-
-                if aoa_g_r232 not in life_style_dict_Nitrosopumilaceae:
-                    life_style_dict_Nitrosopumilaceae[aoa_g_r232] = dict()
-                    life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Free-living'] = 0
-                    life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Host-associated'] = 0
-                if host_grp not in ['NA', 'Na', 'na']:
-                    if host_grp == 'Freeliving':
-                        life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Free-living'] += 1
-                    else:
-                        life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Host-associated'] += 1
-
-            ############################################################################################################
-
-            if host_grp not in ['Freeliving']:
-                if host_grp not in host_grp_dict:
-                    host_grp_dict[host_grp] = 0
-                host_grp_dict[host_grp] += 1
-
-            ############################################################################################################
-
-            habitat_to_use = gnm_habitat_4
-            if aoa_f_r232 not in habitat_dict_f:
-                habitat_dict_f[aoa_f_r232] = dict()
-            if habitat_to_use not in habitat_dict_f[aoa_f_r232]:
-                habitat_dict_f[aoa_f_r232][habitat_to_use] = 0
-            habitat_set.add(habitat_to_use)
-            habitat_dict_f[aoa_f_r232][habitat_to_use] += 1
-
-            ############################################################################################################
-
-            habitat_to_use = gnm_habitat_4
-            if aoa_f_r232 == 'f__Nitrosopumilaceae':
-                if aoa_g_r232 not in habitat_dict_Nitrosopumilaceae:
-                    habitat_dict_Nitrosopumilaceae[aoa_g_r232] = dict()
-                if habitat_to_use not in habitat_dict_Nitrosopumilaceae[aoa_g_r232]:
-                    habitat_dict_Nitrosopumilaceae[aoa_g_r232][habitat_to_use] = 0
-                habitat_set.add(habitat_to_use)
-                habitat_dict_Nitrosopumilaceae[aoa_g_r232][habitat_to_use] += 1
+            # if host_grp in ['Freeliving']:
+            #     m += 1
+            #     if 'f__Nitrososphaeraceae' in gnm_taxon_r232:
+            #         print('mv %s.fna f__Nitrososphaeraceae/' % gnm_id)
+            # else:
+            #     n += 1
+            #
+            # ############################################################################################################
+            #
+            # if aoa_f_r232 not in life_style_dict_f:
+            #     life_style_dict_f[aoa_f_r232] = dict()
+            #     life_style_dict_f[aoa_f_r232]['Free-living'] = 0
+            #     life_style_dict_f[aoa_f_r232]['Host-associated'] = 0
+            # if host_grp not in ['NA', 'Na', 'na']:
+            #     if host_grp == 'Freeliving':
+            #         life_style_dict_f[aoa_f_r232]['Free-living'] += 1
+            #     else:
+            #         life_style_dict_f[aoa_f_r232]['Host-associated'] += 1
+            #
+            # ############################################################################################################
+            #
+            # if aoa_f_r232 == 'f__Nitrosopumilaceae':
+            #
+            #     if aoa_g_r232 not in life_style_dict_Nitrosopumilaceae:
+            #         life_style_dict_Nitrosopumilaceae[aoa_g_r232] = dict()
+            #         life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Free-living'] = 0
+            #         life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Host-associated'] = 0
+            #     if host_grp not in ['NA', 'Na', 'na']:
+            #         if host_grp == 'Freeliving':
+            #             life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Free-living'] += 1
+            #         else:
+            #             life_style_dict_Nitrosopumilaceae[aoa_g_r232]['Host-associated'] += 1
+            #
+            # ############################################################################################################
+            #
+            # if host_grp not in ['Freeliving']:
+            #     if host_grp not in host_grp_dict:
+            #         host_grp_dict[host_grp] = 0
+            #     host_grp_dict[host_grp] += 1
+            #
+            # ############################################################################################################
+            #
+            # habitat_to_use = gnm_habitat_4
+            # if aoa_f_r232 not in habitat_dict_f:
+            #     habitat_dict_f[aoa_f_r232] = dict()
+            # if habitat_to_use not in habitat_dict_f[aoa_f_r232]:
+            #     habitat_dict_f[aoa_f_r232][habitat_to_use] = 0
+            # habitat_set.add(habitat_to_use)
+            # habitat_dict_f[aoa_f_r232][habitat_to_use] += 1
+            #
+            # ############################################################################################################
+            #
+            # habitat_to_use = gnm_habitat_4
+            # if aoa_f_r232 == 'f__Nitrosopumilaceae':
+            #     if aoa_g_r232 not in habitat_dict_Nitrosopumilaceae:
+            #         habitat_dict_Nitrosopumilaceae[aoa_g_r232] = dict()
+            #     if habitat_to_use not in habitat_dict_Nitrosopumilaceae[aoa_g_r232]:
+            #         habitat_dict_Nitrosopumilaceae[aoa_g_r232][habitat_to_use] = 0
+            #     habitat_set.add(habitat_to_use)
+            #     habitat_dict_Nitrosopumilaceae[aoa_g_r232][habitat_to_use] += 1
 
 
 # print('-----------------------------------------------------------------------------------------------------------------')
@@ -162,5 +166,4 @@ for each_gnm in open(meta_data_txt):
 
 print(m)
 print(n)
-
 print(m+n)
